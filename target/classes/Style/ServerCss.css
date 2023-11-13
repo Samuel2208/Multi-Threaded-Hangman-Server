@@ -1,0 +1,36 @@
+.button{
+    -fx-background-color: #34aeb3;
+    -fx-border-color: black;
+    -fx-color: white;
+    -fx-padding: 15px 32px;
+    -fx-text-align: center;
+    -fx-text-decoration: none;
+    -fx-display: inline-block;
+    -fx-font-size: 16px;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+}
+
+* {
+    -fx-primary-color: #007acc;
+    -fx-secondary-color: #4B6EAF;
+    -fx-grey-color: #b9b9b9;
+
+    -fx-focus-color: -fx-secondary-color;
+}
+
+.text-field {
+    -fx-accent: -fx-primary-color;
+    -fx-background-color: -fx-grey-color, #1ad97d;
+    -fx-background-insets: 0, 0 0 1 0;
+    -fx-background-radius: 10;
+}
+.text-field:focused {
+    -fx-background-color: -fx-primary-color, white;
+}
+
+
+.root{
+    -fx-background-color: coral;
+    -fx-padding: 70;
+}

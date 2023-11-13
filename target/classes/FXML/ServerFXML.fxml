@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.geometry.Insets?>
+<BorderPane xmlns:fx="http://javafx.com/fxml1"
+            prefHeight="1000.0" prefWidth="1000.0" styleClass="root" fx:controller = "ServerController"
+            fx:id = "root" >
+    <top><HBox>
+<!--        <padding>-->
+<!--            <Insets top="10" bottom="10" left="10" right="10"/>-->
+<!--        </padding>-->
+        <TextField fx:id = "portNumText" text="Enter Port Number" styleClass="text-field" />
+        <Button fx:id = "startButton" text = "Start" onAction = "#startServer" styleClass="button" />
+        <Button fx:id = "endButton" text = "End" onAction = "#endServer" styleClass="button" disable="true"/>
+    </HBox></top>
+
+    <center><ListView>  </ListView></center>
+
+</BorderPane>
