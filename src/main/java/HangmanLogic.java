@@ -29,7 +29,7 @@ public class HangmanLogic {
             category = new Category("Pets.txt",2);
         }else if (categoryNum == 3) {
             category = new Category("US_States.txt",3);
-        }else if (categoryNum == 23) {
+        }else if (categoryNum == 23) {//testing only
             category = new Category("test.txt",3);
         }
 

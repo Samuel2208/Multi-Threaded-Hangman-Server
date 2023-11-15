@@ -34,7 +34,7 @@ public class Category {
                 while(s.hasNextLine()) {
                     categoryWords.put(s.nextLine(),1);
                 }
-            }else if(whichFile == 23){
+            }else if(whichFile == 23){//testing only
                 fileType = 23;
                 while(s.hasNextLine()) {
                     categoryWords.put(s.nextLine(),1);
