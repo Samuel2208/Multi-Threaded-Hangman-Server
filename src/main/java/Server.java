@@ -58,16 +58,17 @@ public class Server{
 	
 
 		class ClientThread extends Thread{
-			
-		
+
 			Socket connection;
 			int count;
 			ObjectInputStream in;
 			ObjectOutputStream out;
+			HangmanLogic logic;
 			
 			ClientThread(Socket s, int count){
 				this.connection = s;
-				this.count = count;	
+				this.count = count;
+
 			}
 			
 			public void updateClients(String message) {
@@ -79,13 +80,17 @@ public class Server{
 					catch(Exception e) {}
 				}
 			}
+
+			public boolean isNumeric(String str) {
+				return str.matches("-?\\d+(\\.\\d+)?");  // Handles positive and negative integers/decimals
+			}
 			
 			public void run(){
 					
 				try {
 					in = new ObjectInputStream(connection.getInputStream());
 					out = new ObjectOutputStream(connection.getOutputStream());
-					connection.setTcpNoDelay(true);	
+					connection.setTcpNoDelay(true);
 				}
 				catch(Exception e) {
 					System.out.println("Streams not open");
@@ -95,11 +100,34 @@ public class Server{
 					
 				 while(true) {
 					    try {
-					    	String data = in.readObject().toString();
-					    	callback.accept("client: " + count + " sent: " + data);
-					    	updateClients("client #"+count+" said: "+data);
+//							Integer categoryNum = in.readInt();
+//							Character letterGuess = in.readChar();
+							String data = in.readObject().toString();
+
+							callback.accept("client: " + count + " sent: " + data);
+
+//							//Logic
+							if(isNumeric(data)){
+								callback.accept("Data received was: " + data);
+								try {
+									int dataInt = Integer.parseInt(data);
+									logic = new HangmanLogic(dataInt);
+									callback.accept("Secret Word is: " + logic.getSecretWord());
+								} catch (NumberFormatException e) {
+									callback.accept("Error: Cannot convert the string to int.");
+								}
+
+							}else {
+								ArrayList<Character> correctLetters = logic.isLetterInWord(data.charAt(0));
+								out.writeObject(correctLetters);
+								callback.accept("Server: " + portNum+ " sent: " + correctLetters);
+
+
+							}
+
+//					    	updateClients("client #"+count+" said: "+letterGuess);
 					    	
-					    	}
+						}
 					    catch(Exception e) {
 					    	callback.accept("OOOOPPs...Something wrong with the socket from client: " + count + "....closing down!");
 					    	updateClients("Client #"+count+" has left the server!");
