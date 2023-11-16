@@ -19,6 +19,6 @@
         <Button fx:id = "endButton" text = "End" onAction = "#endServer" styleClass="button" disable="true"/>
     </HBox></top>
 
-    <center><ListView>  </ListView></center>
+    <center><ListView fx:id="listItems">  </ListView></center>
 
 </BorderPane>
