@@ -104,7 +104,9 @@ public class Server{
 //							Character letterGuess = in.readChar();
 							String data = in.readObject().toString();
 
-							//Logic
+							callback.accept("client: " + count + " sent: " + data);
+
+//							//Logic
 							if(isNumeric(data)){
 								callback.accept("Data received was: " + data);
 								try {
@@ -112,7 +114,7 @@ public class Server{
 									logic = new HangmanLogic(dataInt);
 									callback.accept("Secret Word is: " + logic.getSecretWord());
 								} catch (NumberFormatException e) {
-									System.out.println("Error: Cannot convert the string to int.");
+									callback.accept("Error: Cannot convert the string to int.");
 								}
 
 							}else {
@@ -125,7 +127,7 @@ public class Server{
 
 //					    	updateClients("client #"+count+" said: "+letterGuess);
 					    	
-					    	}
+						}
 					    catch(Exception e) {
 					    	callback.accept("OOOOPPs...Something wrong with the socket from client: " + count + "....closing down!");
 					    	updateClients("Client #"+count+" has left the server!");
