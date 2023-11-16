@@ -1,9 +1,9 @@
 GuiServer.class
 Client.class
 GameSender.class
-SetupGame.class
 HangmanLogic.class
 Server$ClientThread.class
 ServerController.class
+Category.class
 Server.class
 Server$TheServer.class

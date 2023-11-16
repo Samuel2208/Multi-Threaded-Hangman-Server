@@ -45,38 +45,44 @@ public class HangmanLogic {
 
         words.merge(secretWord,1,Integer::sum);
 
+
         attemptedGuesses = 0;
 
     }
 
+    void newSecretWord(){
+        do{
+            Object[] crunchifyKeys = words.keySet().toArray();
+            Object key = crunchifyKeys[new Random().nextInt(crunchifyKeys.length)];
 
-//    public ArrayList partiallyRight(String userGuess){
-//
-//        char arr[] = secretWord.toCharArray();
-//        ArrayList<Integer> correctletters = new ArrayList<>();
-//
-//        for (int i = 0; i < arr.length; i++) {
-//            if(arr[i] == userGuess.charAt(i)){
-//                correctletters.add(i);
-//            }
-//        }
-//
-//        attemptedGuesses += 1;
-//        return correctletters;
-//
-//    }
+            secretWord = key.toString();
+
+        }while(words.get(secretWord) != 1);
+
+        words.merge(secretWord,1,Integer::sum);
+
+    }
+
 
     public ArrayList isLetterInWord(Character userGuess){
 
-        ArrayList<Integer> correctLetters = new ArrayList<>();
+        ArrayList<Character> correctLetters = new ArrayList<>();
+        int correctLetterCount = 0;
+
 
         for (int i = 0; i < secretWord.length(); i++) {
             if(Character.toLowerCase(secretWord.charAt(i)) == Character.toLowerCase(userGuess)){
-                correctLetters.add(i);
+                correctLetters.add(Character.toLowerCase(userGuess));
+                correctLetterCount += 1;
+            }else{
+                correctLetters.add('#');
             }
         }
 
-        if(!correctLetters.isEmpty()){
+//        System.out.println("Testing Logic: ");
+//        System.out.println(correctLetters);
+
+        if(correctLetterCount > 0){
             return correctLetters;
         }else {
             attemptedGuesses += 1;

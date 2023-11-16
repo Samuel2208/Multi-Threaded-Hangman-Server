@@ -58,16 +58,17 @@ public class Server{
 	
 
 		class ClientThread extends Thread{
-			
-		
+
 			Socket connection;
 			int count;
 			ObjectInputStream in;
 			ObjectOutputStream out;
+			HangmanLogic logic;
 			
 			ClientThread(Socket s, int count){
 				this.connection = s;
-				this.count = count;	
+				this.count = count;
+
 			}
 			
 			public void updateClients(String message) {
@@ -85,7 +86,7 @@ public class Server{
 				try {
 					in = new ObjectInputStream(connection.getInputStream());
 					out = new ObjectOutputStream(connection.getOutputStream());
-					connection.setTcpNoDelay(true);	
+					connection.setTcpNoDelay(true);
 				}
 				catch(Exception e) {
 					System.out.println("Streams not open");
@@ -95,9 +96,22 @@ public class Server{
 					
 				 while(true) {
 					    try {
-					    	String data = in.readObject().toString();
-					    	callback.accept("client: " + count + " sent: " + data);
-					    	updateClients("client #"+count+" said: "+data);
+							Integer categoryNum = in.readInt();
+							Character letterGuess = in.readChar();
+//					    	String data = in.readObject().toString();
+					    	callback.accept("client: " + count + " sent letter: " + letterGuess);
+							//Logic
+
+							logic = new HangmanLogic(categoryNum);
+
+							ArrayList<Integer> correctLetters = logic.isLetterInWord(letterGuess);
+							Integer secretWordSize = logic.secretWordSize();
+//							String secretWord = logic
+
+							out.writeObject(correctLetters);
+							out.writeObject(logic.getAttemptedGuesses());
+
+					    	updateClients("client #"+count+" said: "+letterGuess);
 					    	
 					    	}
 					    catch(Exception e) {
