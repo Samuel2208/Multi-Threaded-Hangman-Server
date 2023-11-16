@@ -80,6 +80,10 @@ public class Server{
 					catch(Exception e) {}
 				}
 			}
+
+			public boolean isNumeric(String str) {
+				return str.matches("-?\\d+(\\.\\d+)?");  // Handles positive and negative integers/decimals
+			}
 			
 			public void run(){
 					
@@ -96,22 +100,30 @@ public class Server{
 					
 				 while(true) {
 					    try {
-							Integer categoryNum = in.readInt();
-							Character letterGuess = in.readChar();
-//					    	String data = in.readObject().toString();
-					    	callback.accept("client: " + count + " sent letter: " + letterGuess);
+//							Integer categoryNum = in.readInt();
+//							Character letterGuess = in.readChar();
+							String data = in.readObject().toString();
+
 							//Logic
+							if(isNumeric(data)){
+								callback.accept("Data received was: " + data);
+								try {
+									int dataInt = Integer.parseInt(data);
+									logic = new HangmanLogic(dataInt);
+									callback.accept("Secret Word is: " + logic.getSecretWord());
+								} catch (NumberFormatException e) {
+									System.out.println("Error: Cannot convert the string to int.");
+								}
 
-							logic = new HangmanLogic(categoryNum);
+							}else {
+								ArrayList<Character> correctLetters = logic.isLetterInWord(data.charAt(0));
+								out.writeObject(correctLetters);
+								callback.accept("Server: " + portNum+ " sent: " + correctLetters);
 
-							ArrayList<Integer> correctLetters = logic.isLetterInWord(letterGuess);
-							Integer secretWordSize = logic.secretWordSize();
-//							String secretWord = logic
 
-							out.writeObject(correctLetters);
-							out.writeObject(logic.getAttemptedGuesses());
+							}
 
-					    	updateClients("client #"+count+" said: "+letterGuess);
+//					    	updateClients("client #"+count+" said: "+letterGuess);
 					    	
 					    	}
 					    catch(Exception e) {
