@@ -96,7 +96,7 @@ public class Server{
 					System.out.println("Streams not open");
 				}
 				
-				updateClients("new client on server: client #"+count);
+//				updateClients("new client on server: client #"+count);
 					
 				 while(true) {
 					    try {
@@ -107,12 +107,13 @@ public class Server{
 							callback.accept("client: " + count + " sent: " + data);
 
 //							//Logic
-							if(isNumeric(data)){
+							if(isNumeric(data)){//category
 								callback.accept("Data received was: " + data);
 								try {
 									int dataInt = Integer.parseInt(data);
 									logic = new HangmanLogic(dataInt);
 									callback.accept("Secret Word is: " + logic.getSecretWord());
+									out.writeObject(logic.getSecretWord().length());
 								} catch (NumberFormatException e) {
 									callback.accept("Error: Cannot convert the string to int.");
 								}

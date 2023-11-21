@@ -24,7 +24,7 @@ public class Category {
                 }
             }else if(whichFile == 2){
                 fileType = 2;
-                while(s.hasNextDouble()) {
+                while(s.hasNextLine()) {
                     categoryWords.put(s.nextLine(),1);
                 }
 
