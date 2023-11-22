@@ -31,7 +31,6 @@ public class GuiServer extends Application{
 	Scene startScene;
 	BorderPane startPane;
 	Server serverConnection;
-	Client clientConnection;
 	
 	ListView<String> listItems, listItems2;
 	
@@ -44,7 +43,6 @@ public class GuiServer extends Application{
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		// TODO Auto-generated method stub
-//		primaryStage.setTitle("The Networked Client/Server GUI Example");
 
 		try {
 			// Read file fxml and draw interface.
@@ -60,90 +58,9 @@ public class GuiServer extends Application{
 			e.printStackTrace();
 			System.exit(1);
 		}
-		
-//		this.serverChoice = new Button("Server");
-//		this.serverChoice.setStyle("-fx-pref-width: 300px");
-//		this.serverChoice.setStyle("-fx-pref-height: 300px");
-//
-//		this.serverChoice.setOnAction(e->{ primaryStage.setScene(sceneMap.get("server"));
-//											primaryStage.setTitle("This is the Server");
-//				serverConnection = new Server(data -> {
-//					Platform.runLater(()->{
-//						listItems.getItems().add(data.toString());
-//					});
-//
-//				});
-//
-//		});
 
-//
-//		this.clientChoice = new Button("Client");
-//		this.clientChoice.setStyle("-fx-pref-width: 300px");
-//		this.clientChoice.setStyle("-fx-pref-height: 300px");
-//
-//		this.clientChoice.setOnAction(e-> {primaryStage.setScene(sceneMap.get("client"));
-//											primaryStage.setTitle("This is a client");
-//											clientConnection = new Client(data->{
-//							Platform.runLater(()->{listItems2.getItems().add(data.toString());
-//											});
-//							});
-//
-//											clientConnection.start();
-//		});
-//
-//		this.buttonBox = new HBox(400, serverChoice, clientChoice);
-//		startPane = new BorderPane();
-//		startPane.setPadding(new Insets(70));
-//		startPane.setCenter(buttonBox);
-//
-//		startScene = new Scene(startPane, 800,800);
-//
-//		listItems = new ListView<String>();
-//		listItems2 = new ListView<String>();
-//
-//		c1 = new TextField();
-//		b1 = new Button("Send");
-//		 .setOnAction(e->{clientConnection.send(c1.getText()); c1.clear();});
-//
-//		sceneMap = new HashMap<String, Scene>();
-//
-//		sceneMap.put("server",  createServerGui(primaryStage));
-//		sceneMap.put("client",  createClientGui());
-//
-//		primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-//            @Override
-//            public void handle(WindowEvent t) {
-//                Platform.exit();
-//                System.exit(0);
-//            }
-//        });
-//
-//
-//
-//		primaryStage.setScene(startScene);
-//		primaryStage.show();
 		
 	}
-	
-//	public Scene createServerGui(Stage primaryStage) {
-//
-//		BorderPane pane = new BorderPane();
-//		pane.setPadding(new Insets(70));
-//		pane.setStyle("-fx-background-color: coral");
-//
-//		pane.setCenter(listItems);
-//
-//		return new Scene(pane, 500, 400);
-//
-//
-//	}
-//
-//	public Scene createClientGui() {
-//
-//		clientBox = new VBox(10, c1,b1,listItems2);
-//		clientBox.setStyle("-fx-background-color: blue");
-//		return new Scene(clientBox, 400, 300);
-//
-//	}
+
 
 }

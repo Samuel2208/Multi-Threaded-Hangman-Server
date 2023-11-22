@@ -24,7 +24,6 @@ public class ServerController implements Initializable {
     private ListView<String> listItems;
 
     Server serverConnection;
-    Client clientConnection;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

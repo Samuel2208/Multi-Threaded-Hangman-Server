@@ -154,4 +154,49 @@ class MyTest {
 
 	}
 
+	@Test
+	void getAttemptedGuesses() {
+
+		HangmanLogic logic = new HangmanLogic(23);
+
+		ArrayList<Character> arr = logic.isLetterInWord('e');
+
+
+		arr = logic.isLetterInWord('z');
+        assertNull(arr, "Wrong array");
+		assertEquals(1, logic.getAttemptedGuesses(), "Wrong guess num");
+
+		arr = logic.isLetterInWord('a');
+		assertNull(arr, "Wrong array");
+		assertEquals(2, logic.getAttemptedGuesses(), "Wrong guess num");
+
+		arr = logic.isLetterInWord('N');
+		assertNotNull(arr, "Wrong array");
+		assertEquals('n', arr.get(4), "Wrong position");
+		assertEquals(2, logic.getAttemptedGuesses(), "Wrong guess num");
+
+		arr = logic.isLetterInWord('x');
+		assertNull(arr, "Wrong array");
+		assertEquals(3, logic.getAttemptedGuesses(), "Wrong guess num");
+
+	}
+
+	@Test
+	void secretWordSize() {
+
+		HangmanLogic logic = new HangmanLogic(23);
+		assertEquals(5, logic.secretWordSize(), "Wrong guess num");
+
+		HangmanLogic logic2 = new HangmanLogic(1);
+		assertEquals(logic2.getSecretWord().length(), logic2.secretWordSize(), "Wrong guess num");
+
+		HangmanLogic logic3 = new HangmanLogic(2);
+		assertEquals(logic3.getSecretWord().length(), logic3.secretWordSize(), "Wrong guess num");
+
+		HangmanLogic logic4 = new HangmanLogic(3);
+		assertEquals(logic4.getSecretWord().length(), logic4.secretWordSize(), "Wrong guess num");
+
+
+	}
+
 }
